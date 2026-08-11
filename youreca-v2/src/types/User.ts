@@ -1,5 +1,5 @@
 export interface User {
-  createdAt: Date;
+  createdAt: string | Date;
   profileImg: string;
   email: string;
   id: string;
