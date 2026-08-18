@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "../providers/QueryProvider";
-import MSWProvider from "../mocks/MSWProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <MSWProvider>
-          <Providers>{children}</Providers>
-        </MSWProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
