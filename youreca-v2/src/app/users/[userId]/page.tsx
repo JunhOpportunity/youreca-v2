@@ -1,13 +1,16 @@
-import { useUser } from "@/src/hooks/useUser";
+import UserInfo from "./UserInfo";
 
 export default async function User({
   params,
 }: {
   params: Promise<{ userId: string }>;
 }) {
-
   const { userId } = await params;
-  const {data} = useUser();
 
-  return <div>{userId} {data?.id}</div>;
+  return (
+    <div>
+      {userId}
+      <UserInfo userId={userId} />
+    </div>
+  );
 }
