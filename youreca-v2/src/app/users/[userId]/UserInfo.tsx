@@ -1,11 +1,18 @@
-import { useUser } from "@/src/hooks/useUser"
+"use client";
 
-export default function UserInfo(userId : string) {
+import { useUser } from "@/src/hooks/useUser";
 
-  const {data} = useUser(userId);
-  
-  return (<div>
+type Props = {
+  userId: string;
+};
 
-  </div>)
+export default function UserInfo({ userId }: Props) {
+  const { data } = useUser(userId);
 
+  return (
+    <div>
+      user Info Page
+      <div>{data?.id}</div>
+    </div>
+  );
 }
