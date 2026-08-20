@@ -1,20 +1,18 @@
 import SearchUI from "./SearchUI";
+import UsersList from "./UsersList";
 
 export default async function Users({
   searchParams,
 }: {
-  searchParams: Promise<{ searchId: string }>;
+  searchParams: Promise<{ keyword: string }>;
 }) {
-  const { searchId } = await searchParams;
-
-  const onSubmit = () => {
-    console.log("검색");
-  };
+  const { keyword } = await searchParams;
 
   return (
     <div>
-      {searchId}
       <SearchUI />
+      검색 결과 : {keyword}
+      <UsersList keyword={keyword} />
     </div>
   );
 }
