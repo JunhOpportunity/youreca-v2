@@ -6,6 +6,6 @@ export const handlers = [
     return HttpResponse.json(users[0]);
   }),
   http.get("/users/1", () => {
-    return HttpResponse.json(users[0])
+    return HttpResponse.json(users)
   }),
 ];
