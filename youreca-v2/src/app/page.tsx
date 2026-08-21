@@ -1,10 +1,13 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
 import { useUser } from "../hooks/useUser";
 
-export default function Home() {
-
+export default function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ searchId: string }>;
+}) {
   // useEffect(() => {
   //   const fetchUser = async() => {
   //     const response = await fetch("/users/me");
@@ -19,12 +22,14 @@ export default function Home() {
 
   const { data, isLoading } = useUser();
 
-  if(isLoading) {
-    return <div>LOADING...</div>
+  if (isLoading) {
+    return <div>LOADING...</div>;
   }
 
   if (data) {
-    console.log("데이터 : ", data)
-    return <div>Tanstack Query DATA TEST</div>
+    console.log("데이터 : ", data);
+    return <div>Tanstack Query DATA TEST</div>;
   }
+
+  return <div></div>;
 }
