@@ -1,3 +1,4 @@
+import Reviews from "./Reviews";
 import UserInfo from "./UserInfo";
 
 export default async function User({
@@ -11,6 +12,7 @@ export default async function User({
     <div>
       {userId}
       <UserInfo userId={userId} />
+      <Reviews targetUserId={userId} />
     </div>
   );
 }
