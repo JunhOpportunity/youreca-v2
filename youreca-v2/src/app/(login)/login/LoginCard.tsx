@@ -1,5 +1,7 @@
 "use client";
 
+import Button from "@/src/components/common/Button";
+import Input from "@/src/components/common/Input";
 import { useLogin } from "@/src/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -31,25 +33,23 @@ export default function LoginCard() {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input
+        <Input
           type="email"
-          name="email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           placeholder="이메일"
         />
-        <input
+        <Input
           type="password"
-          name="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           placeholder="비밀번호"
         />
-        <button>로그인</button>
+        <Button type="submit">로그인</Button>
       </form>
     </div>
   );
