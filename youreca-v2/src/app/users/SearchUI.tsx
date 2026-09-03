@@ -1,5 +1,7 @@
 "use client";
 
+import Button from "@/src/components/common/Button";
+import Input from "@/src/components/common/Input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -16,12 +18,12 @@ export default function SearchUI() {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input
+        <Input
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="사용자 명"
         />
-        <button>검색</button>
+        <Button type="submit">검색</Button>
       </form>
     </div>
   );
