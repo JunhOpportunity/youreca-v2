@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { users } from "./data/users";
 import { reviews } from "./data/reviews";
+import { searchs } from "./data/searchs";
 
 type LoginRequest = {
   email: string;
@@ -12,7 +13,7 @@ export const handlers = [
     return HttpResponse.json(users[0]);
   }),
   http.get("/users/1", () => {
-    return HttpResponse.json(users);
+    return HttpResponse.json(searchs);
   }),
   http.get("/reviews/1", () => {
     const userReviews = reviews.filter((review) => review.targetUserId === "1");
