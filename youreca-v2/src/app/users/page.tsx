@@ -9,10 +9,9 @@ export default async function Users({
   const { keyword } = await searchParams;
 
   return (
-    <div>
+    <main className="mx-auto max-w-6xl px-6">
       <SearchUI />
-      검색 결과 : {keyword}
       <UsersList keyword={keyword} />
-    </div>
+    </main>
   );
 }
