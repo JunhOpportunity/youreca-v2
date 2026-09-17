@@ -1,3 +1,4 @@
+import { Search } from "../types/Search";
 import { User } from "../types/User";
 
 export async function getUser(userId : string): Promise<User> {
@@ -10,7 +11,7 @@ export async function getUser(userId : string): Promise<User> {
   return res.json();
 }
 
-export async function getUsers(keyword : string): Promise<User[]> {
+export async function getUsers(keyword : string): Promise<Search[]> {
   const res = await fetch(`/users/${keyword}`);
 
   if (!res.ok) {
