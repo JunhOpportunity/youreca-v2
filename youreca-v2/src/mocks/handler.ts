@@ -19,6 +19,10 @@ export const handlers = [
     const userReviews = reviews.filter((review) => review.targetUserId === "1");
     return HttpResponse.json(userReviews);
   }),
+  http.get("/reviews/2", () => {
+    const userReviews = reviews.filter((review) => review.targetUserId === "2");
+    return HttpResponse.json(userReviews);
+  }),
   http.post("/auth/login", async ({ request }) => {
     const body = (await request.json()) as LoginRequest;
 
