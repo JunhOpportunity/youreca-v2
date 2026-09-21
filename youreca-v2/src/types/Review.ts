@@ -11,4 +11,6 @@ export interface Review {
   targetUserId: string;
   content: string;
   createdAt: string;
+  keywords: string[];
+  isPublic: boolean;
 }
