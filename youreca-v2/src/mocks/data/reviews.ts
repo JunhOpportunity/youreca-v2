@@ -12,7 +12,7 @@ export const reviews: Review[] = [
     },
     content: "팀원들과 적극적으로 소통하며 프로젝트를 진행했습니다.",
     keywords: ["소통", "팀워크"],
-    isPublic: true,
+    isPublic: "public",
     createdAt: "2026-08-25T10:00:00Z",
   },
 
@@ -27,7 +27,7 @@ export const reviews: Review[] = [
     },
     content: "맡은 업무를 책임감 있게 끝까지 수행했습니다.",
     keywords: ["책임감", "성실함"],
-    isPublic: true,
+    isPublic: "private",
     createdAt: "2026-08-23T10:00:00Z",
   },
 
@@ -42,7 +42,7 @@ export const reviews: Review[] = [
     },
     content: "팀원들과 원활하게 협업하고 적극적으로 의견을 공유했습니다.",
     keywords: ["팀워크", "소통", "열정"],
-    isPublic: true,
+    isPublic: "public",
     createdAt: "2026-08-21T10:00:00Z",
   },
 
@@ -57,7 +57,7 @@ export const reviews: Review[] = [
     },
     content: "프로젝트에 대한 이해도가 높았습니다.",
     keywords: ["열정"],
-    isPublic: false,
+    isPublic: "company",
     createdAt: "2026-08-20T10:00:00Z",
   },
 ];

@@ -1,3 +1,5 @@
+export type ReviewVisibility = "company" | "public" | "private";
+
 export interface Review {
   id: string;
 
@@ -12,5 +14,5 @@ export interface Review {
   content: string;
   createdAt: string;
   keywords: string[];
-  isPublic: boolean;
+  isPublic: ReviewVisibility;
 }
