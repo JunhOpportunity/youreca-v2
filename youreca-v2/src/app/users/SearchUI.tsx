@@ -17,13 +17,14 @@ export default function SearchUI() {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="flex gap-2">
         <Input
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="사용자 명"
+          className="w-auto px-6"
         />
-        <Button type="submit">검색</Button>
+        <Button type="submit" className="flex-1">검색</Button>
       </form>
     </div>
   );

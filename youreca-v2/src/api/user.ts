@@ -1,7 +1,8 @@
+import { Search } from "../types/Search";
 import { User } from "../types/User";
 
 export async function getUser(userId : string): Promise<User> {
-  const res = await fetch(`/users/${userId}`);
+  const res = await fetch(`/user/${userId}`);
 
   if (!res.ok) {
     throw new Error("사용자 정보를 불러오지 못했습니다.");
@@ -10,7 +11,7 @@ export async function getUser(userId : string): Promise<User> {
   return res.json();
 }
 
-export async function getUsers(keyword : string): Promise<User[]> {
+export async function getUsers(keyword : string): Promise<Search[]> {
   const res = await fetch(`/users/${keyword}`);
 
   if (!res.ok) {
