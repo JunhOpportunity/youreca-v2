@@ -9,10 +9,9 @@ export default async function User({
   const { userId } = await params;
 
   return (
-    <div>
-      {userId}
+    <main className="mx-auto max-w-4xl px-6">
       <UserInfo userId={userId} />
       <Reviews targetUserId={userId} />
-    </div>
+    </main>
   );
 }
