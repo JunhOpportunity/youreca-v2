@@ -14,6 +14,7 @@ export const reviews: Review[] = [
     keywords: ["소통", "팀워크"],
     isPublic: "public",
     createdAt: "2026-08-25T10:00:00Z",
+    relationship: '직장 동료',
   },
 
   {
@@ -29,6 +30,7 @@ export const reviews: Review[] = [
     keywords: ["책임감", "성실함"],
     isPublic: "private",
     createdAt: "2026-08-23T10:00:00Z",
+    relationship: "팀 프로젝트 동료"
   },
 
   {
@@ -44,6 +46,7 @@ export const reviews: Review[] = [
     keywords: ["팀워크", "소통", "열정"],
     isPublic: "public",
     createdAt: "2026-08-21T10:00:00Z",
+    relationship: "동아리/스터디"
   },
 
   {
@@ -59,5 +62,6 @@ export const reviews: Review[] = [
     keywords: ["열정"],
     isPublic: "company",
     createdAt: "2026-08-20T10:00:00Z",
+    relationship: "선후배"
   },
 ];

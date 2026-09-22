@@ -15,4 +15,5 @@ export interface Review {
   createdAt: string;
   keywords: string[];
   isPublic: ReviewVisibility;
+  relationship: string;
 }
