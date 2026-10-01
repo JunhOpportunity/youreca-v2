@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "../providers/QueryProvider";
 import MSWProvider from "../mocks/MSWProvider";
+import NavigationBar from "../components/common/NavigationBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MSWProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            <NavigationBar />
+            {children}
+          </Providers>
         </MSWProvider>
       </body>
     </html>
