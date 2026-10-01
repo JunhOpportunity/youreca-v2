@@ -30,18 +30,6 @@ export default function LoginCard() {
 
   return (
     <main className="min-h-screen bg-zinc-50">
-      {/* Header */}
-      <header className="border-b border-zinc-200/80 bg-white">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center px-6">
-          <a
-            href="/"
-            className="text-xl font-bold tracking-tight text-zinc-950"
-          >
-            Youreca
-          </a>
-        </nav>
-      </header>
-
       {/* Login */}
       <section className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-6 py-16">
         <div className="w-full max-w-md">
