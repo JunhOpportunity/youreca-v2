@@ -11,10 +11,12 @@ export default function UsersList({ keyword }: Props) {
   const { data } = useUsers(keyword);
 
   return (
-    <div>
-      {data?.map((user) => (
-        <UserCard user={user} key={user.id} />
-      ))}
-    </div>
+    <main className="mx-auto max-w-6xl px-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-col-3">
+        {data?.map((user) => (
+          <UserCard user={user} key={user.id} />
+        ))}
+      </div>
+    </main>
   );
 }
