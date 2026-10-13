@@ -1,4 +1,3 @@
-import { useUser } from "@/src/hooks/useUser";
 import Reviews from "./Reviews";
 import UserInfo from "./UserInfo";
 import WriteReviewButton from "./WriteReviewButton";
@@ -9,7 +8,6 @@ export default async function User({
   params: Promise<{ userId: string }>;
 }) {
   const { userId } = await params;
-  const { data, isPending, isError } = useUser(userId);
 
   return (
     <main className="min-h-screen bg-zinc-50">
