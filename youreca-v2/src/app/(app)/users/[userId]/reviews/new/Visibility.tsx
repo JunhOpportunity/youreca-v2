@@ -1,136 +1,75 @@
+type VisibilityType = "public" | "organization" | "anonymous";
+
 interface VisibilityProps {
-  visibility: "public" | "organization" | "anonymous";
-  setVisibility: React.Dispatch<
-    React.SetStateAction<"public" | "organization" | "anonymous">
-  >;
+  visibility: VisibilityType;
+  setVisibility: React.Dispatch<React.SetStateAction<VisibilityType>>;
 }
 
-// export function Visibility({ visibility, setVisibility }: VisibilityProps) {
-//   return (
-//     <div>
-//       <input
-//         type="radio"
-//         name="visibility"
-//         id="public"
-//         value="public"
-//         checked={visibility === "public"}
-//         onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-//       />
-//       <label htmlFor="public">모두 공개</label>
-//       <input
-//         type="radio"
-//         name="visibility"
-//         id="organization"
-//         value="organization"
-//         checked={visibility === "organization"}
-//         onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-//       />
-//       <label htmlFor="organization">소속만 공개</label>
-//       <input
-//         type="radio"
-//         name="visibility"
-//         id="anonymous"
-//         value="anonymous"
-//         checked={visibility === "anonymous"}
-//         onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-//       />
-//       <label htmlFor="anonymous">완전 익명</label>
-//     </div>
-//   );
-// }
+const options: {
+  value: VisibilityType;
+  title: string;
+  description: string;
+}[] = [
+  {
+    value: "public",
+    title: "모두 공개",
+    description: "누구나 이 평판을 볼 수 있어요.",
+  },
+  {
+    value: "organization",
+    title: "소속만 공개",
+    description: "같은 소속의 사람에게만 보여요.",
+  },
+  {
+    value: "anonymous",
+    title: "완전 익명",
+    description: "작성자의 정보 없이 공개돼요.",
+  },
+];
 
 export function Visibility({ visibility, setVisibility }: VisibilityProps) {
   return (
-    <div className="space-y-3">
-      <label
-        htmlFor="public"
-        className={`
-          flex cursor-pointer items-start gap-3 rounded-xl border p-4
-          transition-colors
-          ${
-            visibility === "public"
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-200 bg-white hover:border-gray-300"
-          }
-        `}
-      >
-        <input
-          type="radio"
-          name="visibility"
-          id="public"
-          value="public"
-          checked={visibility === "public"}
-          onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-          className="mt-1 h-4 w-4 accent-blue-500"
-        />
+    <fieldset className="space-y-3">
+      <legend className="sr-only">평판 공개 범위 선택</legend>
 
-        <div>
-          <p className="text-sm font-medium text-gray-900">모두 공개</p>
-          <p className="mt-1 text-xs text-gray-500">
-            누구나 이 평판을 볼 수 있어요.
-          </p>
-        </div>
-      </label>
+      {options.map((option) => {
+        const selected = visibility === option.value;
 
-      <label
-        htmlFor="organization"
-        className={`
-          flex cursor-pointer items-start gap-3 rounded-xl border p-4
-          transition-colors
-          ${
-            visibility === "organization"
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-200 bg-white hover:border-gray-300"
-          }
-        `}
-      >
-        <input
-          type="radio"
-          name="visibility"
-          id="organization"
-          value="organization"
-          checked={visibility === "organization"}
-          onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-          className="mt-1 h-4 w-4 accent-blue-500"
-        />
+        return (
+          <label
+            key={option.value}
+            className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+              selected
+                ? "border-blue-500 bg-blue-50/70"
+                : "border-zinc-200 bg-white hover:border-zinc-300"
+            }`}
+          >
+            <input
+              type="radio"
+              name="visibility"
+              value={option.value}
+              checked={selected}
+              onChange={() => setVisibility(option.value)}
+              className="mt-1 h-4 w-4 accent-blue-600"
+            />
 
-        <div>
-          <p className="text-sm font-medium text-gray-900">소속만 공개</p>
-          <p className="mt-1 text-xs text-gray-500">
-            같은 소속의 사람에게만 보여요.
-          </p>
-        </div>
-      </label>
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-semibold text-zinc-900">
+                {option.title}
+              </span>
+              <span className="mt-1 block text-sm leading-5 text-zinc-500">
+                {option.description}
+              </span>
+            </span>
 
-      <label
-        htmlFor="anonymous"
-        className={`
-          flex cursor-pointer items-start gap-3 rounded-xl border p-4
-          transition-colors
-          ${
-            visibility === "anonymous"
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-200 bg-white hover:border-gray-300"
-          }
-        `}
-      >
-        <input
-          type="radio"
-          name="visibility"
-          id="anonymous"
-          value="anonymous"
-          checked={visibility === "anonymous"}
-          onChange={(e) => setVisibility(e.target.value as typeof visibility)}
-          className="mt-1 h-4 w-4 accent-blue-500"
-        />
-
-        <div>
-          <p className="text-sm font-medium text-gray-900">완전 익명</p>
-          <p className="mt-1 text-xs text-gray-500">
-            작성자의 정보 없이 공개돼요.
-          </p>
-        </div>
-      </label>
-    </div>
+            {selected && (
+              <span className="text-sm font-semibold text-blue-600">
+                선택됨
+              </span>
+            )}
+          </label>
+        );
+      })}
+    </fieldset>
   );
 }
