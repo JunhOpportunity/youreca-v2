@@ -23,6 +23,7 @@ const relationshipOptions = [
 
 export default function NewReview({ userId }: Props) {
   const router = useRouter();
+  const isLeavingRef = useRef(false);
 
   const [relationship, setRelationship] = useState("");
   const [visibility, setVisibility] = useState<VisibilityType>("public");
@@ -44,37 +45,16 @@ export default function NewReview({ userId }: Props) {
   }, [isDirty]);
 
   useEffect(() => {
-    window.history.pushState(
-      { reviewFormGuard: true },
-      "",
-      window.location.href
-    );
-
-    const handlePopState = () => {
-      if (
-        isDirtyRef.current &&
-        !window.confirm("작성 중인 평판이 있습니다. 페이지를 나가시겠습니까?")
-      ) {
-        window.history.pushState(
-          { reviewFormGuard: true },
-          "",
-          window.location.href
-        );
-      }
-    };
-
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (!isDirtyRef.current) return;
+      if (!isDirtyRef.current || isLeavingRef.current) return;
 
       event.preventDefault();
       event.returnValue = "";
     };
 
-    window.addEventListener("popstate", handlePopState);
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      window.removeEventListener("popstate", handlePopState);
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
@@ -87,6 +67,7 @@ export default function NewReview({ userId }: Props) {
       return;
     }
 
+    isLeavingRef.current = true;
     router.back();
   };
 
