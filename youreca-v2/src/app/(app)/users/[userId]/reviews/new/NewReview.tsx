@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Keywords from "./Keywords";
 import { Visibility } from "./Visibility";
@@ -30,6 +30,65 @@ export default function NewReview({ userId }: Props) {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const isDirty =
+    relationship !== "" ||
+    content.trim() !== "" ||
+    selectedKeywords.length > 0 ||
+    visibility !== "public";
+
+  const isDirtyRef = useRef(isDirty);
+
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirty]);
+
+  useEffect(() => {
+    window.history.pushState(
+      { reviewFormGuard: true },
+      "",
+      window.location.href
+    );
+
+    const handlePopState = () => {
+      if (
+        isDirtyRef.current &&
+        !window.confirm("작성 중인 평판이 있습니다. 페이지를 나가시겠습니까?")
+      ) {
+        window.history.pushState(
+          { reviewFormGuard: true },
+          "",
+          window.location.href
+        );
+      }
+    };
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (!isDirtyRef.current) return;
+
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  const handleLeave = () => {
+    if (
+      isDirty &&
+      !window.confirm("작성 중인 평판이 있습니다. 페이지를 나가시겠습니까?")
+    ) {
+      return;
+    }
+
+    router.back();
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,7 +138,7 @@ export default function NewReview({ userId }: Props) {
         <div className="mb-8">
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={handleLeave}
             className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-zinc-950"
           >
             <span aria-hidden="true">←</span>
@@ -192,7 +251,7 @@ export default function NewReview({ userId }: Props) {
           <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
             <button
               type="button"
-              onClick={() => router.back()}
+              onClick={handleLeave}
               disabled={isSubmitting}
               className="h-12 rounded-xl border border-zinc-200 bg-white px-6 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50"
             >
