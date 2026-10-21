@@ -5,4 +5,8 @@ export interface User {
   id: string;
   job?: string;
   nickname: string;
+  company?: string;
+  jobTitle?: string;
+  position?: string;
+  introduction?: string;
 }
