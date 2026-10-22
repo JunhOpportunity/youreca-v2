@@ -1,12 +1,20 @@
 export interface User {
   createdAt: string | Date;
-  profileImg: string;
+  profileImg: string | null;
   email: string;
   id: string;
   job?: string;
   nickname: string;
-  company?: string;
-  jobTitle?: string;
-  position?: string;
-  introduction?: string;
+  company?: string | null;
+  jobTitle?: string | null;
+  position?: string | null;
+  introduction?: string | null;
 }
+
+export type UpdateMyProfileRequest = {
+  nickname: string;
+  company: string | null;
+  jobTitle: string | null;
+  position: string | null;
+  introduction: string | null;
+};
