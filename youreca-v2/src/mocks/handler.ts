@@ -3,6 +3,8 @@ import { users } from "./data/users";
 import { reviews } from "./data/reviews";
 import { searchs } from "./data/searchs";
 import { UpdateMyProfileRequest } from "../types/User";
+import { experiences } from "./data/experiences";
+import { Experience } from "../types/Experience";
 
 type LoginRequest = {
   email: string;
@@ -10,6 +12,8 @@ type LoginRequest = {
 };
 
 let myProfile = { ...users[0] };
+
+const currentUserId = '1';
 
 export const handlers = [
   http.get("/users/me", () => {
@@ -100,5 +104,62 @@ export const handlers = [
   }),
 
   // Experiences MSW 핸들러
+  http.get("/me/experiences", () => {
+    const myExperiences = experiences.filter(
+      (experience) => experience.userId === currentUserId,
+    );
 
+    return HttpResponse.json(experiences[0], {status : 200});
+  }),
+  http.post("/me/experiences", async ({request}) => {
+    const body = (await request.json())
+
+    const newExperience: Experience = {
+      id: crypto.randomUUID(),
+      ...body,
+    }
+
+    // experiences = [...experiences, newExperience];
+
+    return HttpResponse.json(newExperience, { status: 201 });
+  }),
+  http.patch("/me/experiences/:id", async ({params, request}) => {
+    const id = String(params.id);
+    const body = await request.json()
+
+    const experience = experiences.find((item) => item.id === id);
+
+    if (!experience) {
+      return HttpResponse.json(
+        { message: "경력을 찾을 수 없습니다." },
+        { status: 404 },
+      );
+    }
+  
+    experiences = experiences.map((item) =>
+      item.id === id ? { ...item, ...body } : item,
+    );
+  
+    const updatedExperience = experiences.find((item) => item.id === id)!;
+  
+    return HttpResponse.json(updatedExperience, { status: 200 });
+  }),
+  http.delete("/me/experiences/:id", ({params}) => {
+    const id = String(params.id);
+    const exists = experiences.some((item) => item.id === id);
+  
+    if (!exists) {
+      return HttpResponse.json(
+        { message: "경력을 찾을 수 없습니다." },
+        { status: 404 },
+      );
+    }
+  
+    experiences = experiences.filter((item) => item.id !== id);
+  
+    return new HttpResponse(null, { status: 204 });
+  }),
+  http.post("/auth/logout", () => {
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];
